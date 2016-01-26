@@ -1,0 +1,123 @@
+fileFormatVersion: 2
+guid: 313d8c76d00aa824bb798ad9dac6d3c6
+timeCreated: 1453733071
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: duck
+    100002: //RootNode
+    100004: Joint
+    100006: Joint.1
+    100008: Joint.1.2
+    100010: Joint.1.3
+    100012: Joint.1.4
+    100014: Joint.1.5
+    100016: Joint.2
+    100018: Joint.2.2
+    100020: Joint.2.3
+    100022: Joint.2.4
+    100024: Joint.2.5
+    100026: Joint.2.6
+    100028: Joint.3
+    100030: Joint.3.2
+    100032: Joint.3.3
+    100034: Joint.3.4
+    100036: Joint.4
+    100038: Joint.4.2
+    100040: Skin
+    100042: Skin.2
+    100044: wings
+    400000: duck
+    400002: //RootNode
+    400004: Joint
+    400006: Joint.1
+    400008: Joint.1.2
+    400010: Joint.1.3
+    400012: Joint.1.4
+    400014: Joint.1.5
+    400016: Joint.2
+    400018: Joint.2.2
+    400020: Joint.2.3
+    400022: Joint.2.4
+    400024: Joint.2.5
+    400026: Joint.2.6
+    400028: Joint.3
+    400030: Joint.3.2
+    400032: Joint.3.3
+    400034: Joint.3.4
+    400036: Joint.4
+    400038: Joint.4.2
+    400040: Skin
+    400042: Skin.2
+    400044: wings
+    4300000: wings
+    4300002: duck
+    7400000: C4D Animation Take
+    9500000: //RootNode
+    13700000: duck
+    13700002: wings
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
