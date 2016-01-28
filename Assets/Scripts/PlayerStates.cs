@@ -24,6 +24,25 @@ public class PlayerStates : MonoBehaviour {
 	public enum State {
 		Flying, Walking, Swimming, Falling
 	}
+		
+
+	public enum PowerUpState
+	{
+		/// <summary>
+		/// The player does not have a powerup.
+		/// </summary>
+		None,
+
+		/// <summary>
+		/// The player is invincible and moves faster.
+		/// </summary>
+		Invincible,
+
+		/// <summary>
+		/// The player gets bigger and can jump on enemies to kill them.
+		/// </summary>
+		Shroomed
+	}
 
 	public int health = 100;
 
@@ -31,6 +50,11 @@ public class PlayerStates : MonoBehaviour {
 	/// Current state of the player.
 	/// </summary>
 	public State currentState;
+
+	/// <summary>
+	/// Current powerup state of the player.
+	/// </summary>
+	public PowerUpState currentPowerupState;
 
 	/// <summary>
 	/// Current points the player has.
@@ -110,8 +134,10 @@ public class PlayerStates : MonoBehaviour {
 
 	public void alterHealth(int amount) {
 		//health must be between 0 and 100
-		health = Mathf.Clamp (health + amount, 0, 100);
-		GUIHandler.instance.updateHealthBar(health);
+		if (currentPowerupState != PowerUpState.Invincible) {
+			health = Mathf.Clamp (health + amount, 0, 100);
+			GUIHandler.instance.updateHealthBar (health);
+		}
 	}
 
 	public void alterResources(int amount) {

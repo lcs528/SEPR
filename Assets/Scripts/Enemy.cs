@@ -55,7 +55,7 @@ public class Enemy : AI {
 	/// Health = Health - change
 	/// </summary>
 	/// <param name="change">Change.</param>
-	public void changeHealth(int change) {
+	public void decreaseHealth(int change) {
 		health -= change;
 		if (health <= 0) {
 			PlayerStates.instance.alterPoints(pointsForKill);
@@ -67,7 +67,8 @@ public class Enemy : AI {
 
 	void OnCollisionEnter (Collision c) {
 		if (c.transform.tag == "Player" && Time.time >= lastDamageTime) {
-			PlayerStates.instance.alterHealth(-damageToPlayer);
+
+			PlayerStates.instance.alterHealth (-damageToPlayer);
 			lastDamageTime = Time.time + hitRate;
 		}
 	}
