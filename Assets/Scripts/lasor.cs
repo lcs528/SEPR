@@ -23,7 +23,7 @@ public class lasor : MonoBehaviour {
 
 	void OnTriggerEnter (Collider c) {
 		if (c.transform.tag == "Enemy" && Time.time >= lastTime) {
-			c.gameObject.GetComponent<Enemy> ().changeHealth (damage);
+			c.gameObject.GetComponent<Enemy> ().decreaseHealth (damage);
 			lastTime = Time.time;
 		}
 	}

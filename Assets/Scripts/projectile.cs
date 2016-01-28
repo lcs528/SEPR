@@ -35,7 +35,7 @@ public class projectile : MonoBehaviour {
 	/// <param name="c">C.</param>
 	void OnCollisionEnter (Collision c) {
 		if (c.transform.tag == "Enemy") {
-			c.gameObject.GetComponent<Enemy>().changeHealth(damage);
+			c.gameObject.GetComponent<Enemy>().decreaseHealth(damage);
 		}
 		Instantiate (explosion, transform.position, transform.rotation);
 		Destroy (this.gameObject);

@@ -13,6 +13,13 @@ public class PlayerController : MonoBehaviour {
 	/// </summary>
 	public float movementSpeed;
 
+
+	/// <summary>
+	/// The movement speed mod.
+	/// Multiplied with movement speed before movement speed is aplied.
+	/// </summary>
+	private float movementSpeedMod = 1.0f;
+
 	/// <summary>
 	/// The flight speed of the player.
 	/// </summary>
@@ -58,6 +65,10 @@ public class PlayerController : MonoBehaviour {
 	/// </summary>
 	public GameObject duckWings;
 
+	public GameObject invincibleKillEffect;
+
+	public GameObject jumpWeapon;
+
 
 	/// <summary>
 	/// Height at which the player is considered to be flying.
@@ -89,11 +100,18 @@ public class PlayerController : MonoBehaviour {
 		//pos is altered throghout this call then applied at the end.
 		Vector3 pos = transform.position;
 
+
+		//quadruple duck speed if its invincible.
+		movementSpeedMod = invincible ()? 4.0f : 1.0f;
+
+		//If shroomed then activate the jump weapon.
+		jumpWeapon.SetActive (shroomed ());
+
 		//Handles input from the player
 		if (Input.GetAxis ("Vertical") != 0 || Input.GetAxis ("Horizontal") != 0) {
 			if (p.currentState == PlayerStates.State.Walking) {
-				pos += transform.forward * Input.GetAxis ("Vertical") * movementSpeed * Time.deltaTime;
-				pos += transform.right * Input.GetAxis ("Horizontal") * movementSpeed * Time.deltaTime;
+				pos += transform.forward * Input.GetAxis ("Vertical") * movementSpeed * movementSpeedMod * Time.deltaTime;
+				pos += transform.right * Input.GetAxis ("Horizontal") * movementSpeed * movementSpeedMod * Time.deltaTime;
 			} else if(p.currentState == PlayerStates.State.Flying) {
 				pos += transform.forward * Input.GetAxis ("Vertical") * Mathf.Clamp (distanceToGround ()*2, movementSpeed, flightSpeed) * Time.deltaTime;
 				pos += transform.right * Input.GetAxis ("Horizontal") * Mathf.Clamp (distanceToGround ()*2, movementSpeed, flightSpeed) * Time.deltaTime;
@@ -107,10 +125,20 @@ public class PlayerController : MonoBehaviour {
 			transform.RotateAround(transform.position, Vector3.up ,Input.GetAxis("Mouse X") * lookSensitivity);
 		}
 
-		//flying up
-		if (Input.GetButton ("Jump") && transform.position.y <= maximumHeight && p.energy >= 0 && p.currentState != PlayerStates.State.Falling) {
-			startFlying();
-			pos.y +=  ascentSpeed * Time.deltaTime;
+
+		if (Input.GetButton ("Jump")) {
+
+			//Jumping because mushroom mode.
+			if (shroomed ()) {
+				if (distanceToGround() <= 1.0f) {
+					r.velocity = new Vector3 (0, 6, 0);
+				}
+			}
+			//flying up
+			else if (transform.position.y <= maximumHeight && p.energy >= 0 && p.currentState != PlayerStates.State.Falling) {
+				startFlying ();
+				pos.y += ascentSpeed * Time.deltaTime;
+			}
 		}
 
 		//flying down
@@ -142,6 +170,22 @@ public class PlayerController : MonoBehaviour {
 
 		//apply transformation
 		r.MovePosition (pos);
+	}
+
+	/// <summary>
+	/// Easy access to know if we have the invincible powerup.
+	/// </summary>
+	public bool invincible()
+	{
+		return p.currentPowerupState == PlayerStates.PowerUpState.Invincible;
+	}
+
+	/// <summary>
+	/// Easy access to know if we have the shroomed powerup.
+	/// </summary>
+	public bool shroomed()
+	{
+		return p.currentPowerupState == PlayerStates.PowerUpState.Shroomed;
 	}
 
 	/// <summary>
@@ -224,6 +268,26 @@ public class PlayerController : MonoBehaviour {
 	public void swimming () {
 		if (transform.position.y >= 0 && transform.position.y <= flightHeight) {
 			startWalking();
+		}
+	}
+
+	void OnCollisionEnter (Collision c) {
+
+
+		if (c.transform.tag == "Enemy") {
+			//If we bump in to an enemy while we are invincible then kill them.
+			if (invincible ()) {
+				Enemy e = c.gameObject.GetComponent<Enemy> ();
+				e.decreaseHealth (e.health);
+
+				Instantiate (invincibleKillEffect, c.transform.position, Quaternion.identity);
+			}
+
+			//If we bump in to an enemy while shroomed kill them if we landed on top.
+			if(shroomed ())
+			{
+				
+			}
 		}
 	}
 
