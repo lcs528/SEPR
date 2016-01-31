@@ -112,6 +112,12 @@ public class PlayerStates : MonoBehaviour {
 		//health must be between 0 and 100
 		health = Mathf.Clamp (health + amount, 0, 100);
 		GUIHandler.instance.updateHealthBar(health);
+		if (health == 0) {
+			GUIHandler.instance.updateGameOver ();
+			Invoke("loadMain",5f);
+		}
+
+
 	}
 
 	public void alterResources(int amount) {
@@ -151,5 +157,8 @@ public class PlayerStates : MonoBehaviour {
 		}
 	}
 
+	public void loadMain(){
+		Application.LoadLevel ("mainmenu");
+	}
 
 }
